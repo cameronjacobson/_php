@@ -109,4 +109,68 @@ trait Collections
 		$this->data = $return;
 		return $this;
 	}
+
+	public function reject(callable $iterator, $context = null){
+		$this->bindTo($iterator, $context);
+		$return = array();
+		if(is_array($this->data)){
+			foreach($this->data as $key => $value){
+				if(!call_user_func_array($iterator, array($value))){
+					$return[] = $value;
+				}
+			}
+		}
+		$this->data = $return;
+		return $this;
+	}
+
+	public function every(callable $iterator = null, $context = null){
+		$this->bindTo($iterator, $context);
+		$return = true;
+		if(is_array($this->data)){
+			foreach($this->data as $key => $value){
+				if(!call_user_func_array($iterator, array($value))){
+					$return = false;
+					break;
+				}
+			}
+		}
+		$this->data = $return;
+		return $this;
+	}
+
+	public function some(callable $iterator = null, $context = null){
+		$this->bindTo($iterator, $context);
+		$return = false;
+		if(is_array($this->data)){
+			foreach($this->data as $key => $value){
+				if(call_user_func_array($iterator, array($value))){
+					$return = true;
+					break;
+				}
+			}
+		}
+		$this->data = $return;
+		return $this;
+	}
+
+	public function contains($value){
+		$this->data = in_array($value, $this->data);
+		return $this;
+	}
+
+	public function invoke($methodName, $arguments = null){
+		$return = array();
+		if(is_array($this->data)){
+			foreach($this->data as $key => $value){
+				$args = array($value);
+				if(!empty($arguments)){
+					$args[] = $arguments;
+				}
+				$return[$key] = call_user_func_array($methodName, $args);
+			}
+		}
+		$this->data = $return;
+		return $this;
+	}
 }

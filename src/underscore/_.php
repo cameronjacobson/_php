@@ -41,8 +41,8 @@ class _
 		}
 	}
 
-	private function bindTo(callable &$iterator, $context = null){
-		$iterator = empty($context) ? $iterator : $iterator->bindTo($context, get_class($context));
+	private function bindTo(callable &$iterator = null, $context = null){
+		$iterator = empty($iterator) || empty($context) ? $iterator : $iterator->bindTo($context, get_class($context));
 	}
 
 	private function setConstructorData($data){

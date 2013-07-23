@@ -52,12 +52,30 @@ $listOfPlays = [
 ];
 var_dump(_($listOfPlays)->findWhere(["author"=>"Shakespeare", "year"=>1611])->data);
 
+var_dump(_([1,2,3,4,5,6])->reject(function($num){return $num %2 == 0;})->data);
+
+var_dump(_([1,2,3,4,5,6])->every(function($num){return $num > 0;})->data);
+var_dump(_([1,2,3,4,5,6])->every(function($num){return $num < 0;})->data);
+
+var_dump(_([1,2,3,4,5,6])->some(function($num){return $num > 5;})->data);
+var_dump(_([1,2,3,4,5,6])->some(function($num){return $num > 6;})->data);
+
+var_dump(_([1,2,3,4,5,6])->contains(3)->data);
+var_dump(_([1,2,3,4,5,6])->contains(9)->data);
+
+echo 'MYRSORT'.PHP_EOL;
+
+var_dump(_([[1,2,3],[4,5,6]])->invoke('myrsort')->data);
 
 
 
 
+// HELPER CLASSES / FUNCTIONS
 
-// HELPER CLASSES
+function myrsort($data){
+	rsort($data);
+	return $data;
+}
 
 class blah
 {
