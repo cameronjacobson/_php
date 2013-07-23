@@ -4,7 +4,7 @@ namespace underscore\Traits;
 
 trait Collections
 {
-    public function each(callable $iterator, $context = null){
+	public function each(callable $iterator, $context = null){
 		$this->bindTo($iterator, $context);
 		if(is_array($this->data)){
 			foreach($this->data as $k=>$v){
@@ -12,9 +12,9 @@ trait Collections
 			}
 		}
 		return $this;
-    }
+	}
 
-    public function map(callable $iterator, $context = null){
+	public function map(callable $iterator, $context = null){
 		$this->bindTo($iterator, $context);
 		if(is_array($this->data)){
 			foreach($this->data as $k=>$v){
@@ -22,7 +22,7 @@ trait Collections
 			}
 		}
 		return $this;
-    }
+	}
 
 	public function reduce(callable $iterator, $memo, $context = null){
 		$this->bindTo($iterator, $context);

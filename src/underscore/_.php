@@ -9,11 +9,11 @@ class _
 {
 	use Traits\Collections;
 
-    private $data;
+	private $data;
 
-    public function __construct($data){
-        $this->setConstructorData($data);
-    }
+	public function __construct($data){
+		$this->setConstructorData($data);
+	}
 
 	private function strictEquals($val1, $val2){
 		switch(strtolower(gettype($val1))){
