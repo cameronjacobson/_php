@@ -4,7 +4,6 @@ require_once(dirname(__DIR__).'/vendor/autoload.php');
 require_once(dirname(__DIR__).'/util/_.php');
 
 
-
 // _.each
 var_dump(_(new abc())->each(function($value, $key, $data){
     return $value + $this->a;
@@ -13,6 +12,46 @@ var_dump(_(new abc())->each(function($value, $key, $data){
 var_dump(_([3,4,5,6])->each(function($value, $key, $data){
     return $value + $this->a;
 }, new blah())->data);
+
+
+// _.reduce
+var_dump(_([1,2,3])->reduce(function($memo, $num){
+	return $memo+$num;
+},0)->data);
+
+// _.reduceRight
+var_dump(_([[1,2],[3,4],[5,6]])->reduceRight(function($a, $b){
+	return array_merge($a,$b);
+},array())->data);
+
+
+
+// _.find
+var_dump(_([1,2,3,4,5])->find(function($value){
+	return !($value%4);
+})->data);
+
+// _.filter
+var_dump(_([1,2,3,4,5])->filter(function($value){
+	return $value <= 3;
+})->data);
+
+// _.where
+$listOfPlays = [
+	["title"=>"Cymbeline", "author"=>"Shakespeare", "year"=>1611],
+	["title"=>"The Tempest", "author"=>"Shakespeare", "year"=>1611],
+	["title"=>"Julius Caesar", "author"=>"Shakespeare", "year"=>1599]
+];
+var_dump(_($listOfPlays)->where(["author"=>"Shakespeare", "year"=>1611])->data);
+
+// _.findWhere
+$listOfPlays = [
+	["title"=>"Cymbeline", "author"=>"Shakespeare", "year"=>1611],
+	["title"=>"The Tempest", "author"=>"Shakespeare", "year"=>1611],
+	["title"=>"Julius Caesar", "author"=>"Shakespeare", "year"=>1599]
+];
+var_dump(_($listOfPlays)->findWhere(["author"=>"Shakespeare", "year"=>1611])->data);
+
 
 
 
